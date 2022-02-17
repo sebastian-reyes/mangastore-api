@@ -40,7 +40,7 @@ public class Usuario implements Serializable{
     @Column(unique = true, length = 60)
     private String email;
 
-    @Column(length = 20)
+    @Column(length = 255)
     private String password;
 
     @Column(length = 40)
