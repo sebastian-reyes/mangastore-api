@@ -34,7 +34,7 @@ public class Autor implements Serializable{
     private String nombre;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "autor", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","autor"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","autor","id_manga","editorial"})
     private List<Manga> mangas;
 
     /**
