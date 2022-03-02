@@ -25,6 +25,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
                 .antMatchers(HttpMethod.POST, "/usuarios/registro/cliente").permitAll()
                 .antMatchers(HttpMethod.GET, "/mangas/page/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/mangas/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/mangas/foto/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/mangaka").permitAll()
                 .antMatchers(HttpMethod.GET, "/mangaka/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/volumen/*").permitAll()

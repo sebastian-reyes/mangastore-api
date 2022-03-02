@@ -54,7 +54,7 @@ public class Volumen implements Serializable{
 
     @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_manga")
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "volumenes"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "volumenes","id_manga"})
     private Manga manga;
 
     /**
