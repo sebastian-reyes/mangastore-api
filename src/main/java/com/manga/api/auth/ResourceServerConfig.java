@@ -17,11 +17,12 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableResourceServer
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/").permitAll()
                 .antMatchers(HttpMethod.POST, "/usuarios/registro/cliente").permitAll()
                 .antMatchers(HttpMethod.GET, "/mangas/page/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/mangas/*").permitAll()
@@ -29,13 +30,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
                 .antMatchers(HttpMethod.GET, "/mangaka").permitAll()
                 .antMatchers(HttpMethod.GET, "/mangaka/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/volumen/*").permitAll()
-                .antMatchers(HttpMethod.GET,"/volumen/foto/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/volumen/foto/*").permitAll()
                 .anyRequest().authenticated()
                 .and().cors().configurationSource(corsConfigurationSource());
     }
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource(){
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(Arrays.asList("http://localhost:4200/"));
         config.setAllowedMethods(Arrays.asList("*"));
