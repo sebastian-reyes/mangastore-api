@@ -3,10 +3,13 @@ package com.manga.api.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.activation.FileTypeMap;
 
@@ -29,7 +32,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -116,6 +121,41 @@ public class UsuarioRestController {
             response.put("mensaje", "Error al realizar la consulta a la base de datos.");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Secured({ "ROLE_USER", "ROLE_ADMIN" })
+    @PostMapping("/foto")
+    public ResponseEntity<?> subirFotoUsuario(@RequestParam("foto") MultipartFile foto,
+            @RequestParam("id") Integer id) {
+        Usuario usuario = service.buscarUsuario(id);
+        Map<String, Object> response = new HashMap<>();
+        if (!foto.isEmpty()) {
+            String nombre_foto = UUID.randomUUID().toString() + "_" + foto.getOriginalFilename().replace(" ", "");
+            Path ruta_foto = Paths.get("src\\main\\resources\\static\\fotos\\usuarios").resolve(nombre_foto)
+                    .toAbsolutePath();
+            try {
+                Files.copy(foto.getInputStream(), ruta_foto);
+            } catch (Exception e) {
+                response.put("mensaje", "Error al subir la imagen");
+                return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            String nombre_foto_anterior = usuario.getFoto();
+            if (nombre_foto_anterior != null && nombre_foto_anterior.length() > 0) {
+                Path ruta_foto_anterior = Paths.get("src\\main\\resources\\static\\fotos\\usuarios")
+                        .resolve(nombre_foto_anterior).toAbsolutePath();
+                File archivo_foto_anterior = ruta_foto_anterior.toFile();
+                if (archivo_foto_anterior.exists() && archivo_foto_anterior.canRead()) {
+                    archivo_foto_anterior.delete();
+                }
+            }
+            usuario.setFoto(nombre_foto);
+            service.guardarUsuario(usuario);
+            response.put("mensaje", "Ha subido correctamente la imagen.");
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+        } else {
+            response.put("mensaje", "El campo foto no puede estar vacío");
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
     }
 }
