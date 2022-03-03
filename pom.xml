@@ -14,7 +14,7 @@
 	<name>api-manga</name>
 	<description>API Rest para tienda de mangas</description>
 	<properties>
-		<java.version>14</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
