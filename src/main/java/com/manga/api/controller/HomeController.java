@@ -14,8 +14,8 @@ public class HomeController {
     @GetMapping("/")
     public ResponseEntity<?> home(){
         Map<String, Object> response = new HashMap<>();
-        response.put("Mangakas", "http://localhost:9898/api/mangaka");
-        response.put("Mangas", "http://localhost:9898/api/mangas/page/0");
+        response.put("Mangakas", "https://test-apimanga.herokuapp.com/api/mangaka");
+        response.put("Mangas", "https://test-apimanga.herokuapp.com//api/mangas/page/0");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
