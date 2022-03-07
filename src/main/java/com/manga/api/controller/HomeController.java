@@ -15,7 +15,9 @@ public class HomeController {
     public ResponseEntity<?> home(){
         Map<String, Object> response = new HashMap<>();
         response.put("Mangakas", "https://test-apimanga.herokuapp.com/api/mangaka");
-        response.put("Mangas", "https://test-apimanga.herokuapp.com//api/mangas/page/0");
+        response.put("Mangas", "https://test-apimanga.herokuapp.com/api/mangas/page/0");
+        response.put("Volumenes", "https://test-apimanga.herokuapp.com/api/volumen/1");
+        response.put("Fotos de volumenes", "https://test-apimanga.herokuapp.com/api/volumen/foto/1");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
