@@ -1,5 +1,11 @@
 # API RESTfull con Spring Boot - Manga
 
+## Test Hosting
+
+Base URL:
+
+https://test-apimanga.herokuapp.com/api/
+
 ## Endpoints
 
 ### Públicos
