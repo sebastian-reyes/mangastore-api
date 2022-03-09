@@ -100,6 +100,7 @@ public class VolumenRestController {
 		}
 	}
 
+	@Secured({ "ROLE_ADMIN", "ROLE_ALMACEN" })
 	@PostMapping("/registro/foto")
 	public ResponseEntity<?> subirFotoManga(@RequestParam("foto") MultipartFile foto, @RequestParam("id") Integer id) {
 		Volumen vol = service.buscarVolumen(id);
