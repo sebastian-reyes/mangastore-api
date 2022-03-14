@@ -30,14 +30,14 @@ public class Genero implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_genero;
 
-    @Column(length = 60, unique = true)
-    private String nombre_genero;
+    @Column(length = 60, unique = true, name = "nombre_genero")
+    private String nombre;
 
     @Column(unique = true)
     private String descripcion;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "genero", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","genero"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","genero","volumenes"})
     private List<Manga> mangas;
 
     /**

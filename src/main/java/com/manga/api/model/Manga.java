@@ -57,8 +57,12 @@ public class Manga implements Serializable{
     private Editorial editorial;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "manga", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","manga","id_volumen"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","manga"})
     public List<Volumen> volumenes;
+    
+    public Integer getNumero_volumenes() {
+    	return volumenes.size();
+    }
 
     /**
 	* 
