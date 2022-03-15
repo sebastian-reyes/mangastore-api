@@ -35,12 +35,12 @@ public class VolumenRestController {
 	@Autowired
 	private IVolumenService service;
 
-	@GetMapping("/{id}")
-	public ResponseEntity<?> buscarManga(@PathVariable Integer id) {
+	@GetMapping("/{url}")
+	public ResponseEntity<?> buscarManga(@PathVariable String url) {
 		Map<String, Object> response = new HashMap<>();
 		Volumen volumen = null;
 		try {
-			volumen = service.buscarVolumen(id);
+			volumen = service.findByUrl(url);
 			if (volumen != null) {
 				return new ResponseEntity<>(volumen, HttpStatus.OK);
 			} else {
