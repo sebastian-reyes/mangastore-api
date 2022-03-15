@@ -22,5 +22,10 @@ public class VolumenService implements IVolumenService{
     public Volumen guardarVolumen(Volumen v) {
         return repository.save(v);
     }
+
+	@Override
+	public Volumen findByUrl(String url) {
+		return repository.findByUrl(url);
+	}
     
 }

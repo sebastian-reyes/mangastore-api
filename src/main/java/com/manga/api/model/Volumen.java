@@ -51,6 +51,9 @@ public class Volumen implements Serializable{
 
     @Column(unique = true)
     private String foto;
+    
+    @Column(unique = true, name ="url_vol")
+    private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_manga")
