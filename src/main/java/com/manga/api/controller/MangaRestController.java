@@ -35,12 +35,12 @@ public class MangaRestController {
         return service.listarMangas(PageRequest.of(page, 10));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> buscarManga(@PathVariable Integer id) {
+    @GetMapping("/{url_manga}")
+    public ResponseEntity<?> buscarManga(@PathVariable String url_manga) {
         Map<String, Object> response = new HashMap<>();
         Manga manga = null;
         try {
-            manga = service.buscarManga(id);
+            manga = service.findByUrl(url_manga);
             if (manga != null) {
                 return new ResponseEntity<>(manga, HttpStatus.OK);
             } else {

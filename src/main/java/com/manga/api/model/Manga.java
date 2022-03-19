@@ -40,6 +40,9 @@ public class Manga implements Serializable{
 
     @Column(unique = true)
     private String foto;
+    
+    @Column(unique=true, name="url_manga")
+    private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_autor")

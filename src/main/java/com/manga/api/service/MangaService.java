@@ -29,4 +29,9 @@ public class MangaService implements IMangaService{
     public Manga buscarManga(int id) {
         return repository.findById(id).orElse(null);
     }
+
+	@Override
+	public Manga findByUrl(String url) {
+		return repository.findByUrl(url);
+	}
 }

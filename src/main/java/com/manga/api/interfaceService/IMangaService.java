@@ -9,4 +9,5 @@ public interface IMangaService {
     public Page<Manga> listarMangas(Pageable pageable);
     public Manga guardarManga(Manga m);
     public Manga buscarManga(int id);
+    public Manga findByUrl(String url);
 }
